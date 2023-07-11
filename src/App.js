@@ -1,5 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+// bind electron main.js and react App.js for ICP using "remote"
+//! these code blocks are for the older version of Electron
+//* const electron = window.require("electron");
+//* const remote = electron.remote;
+//* const { BrowserWindow, dialog, Menu } = remote;
+
+// new "remote" usage after Electron version 5.0.0
+const remote = window.require("@electron/remote");
+const { BrowserWindow, dialog, Menu } = remote;
 
 function App() {
   return (

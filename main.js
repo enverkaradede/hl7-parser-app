@@ -11,7 +11,7 @@ const createWindow = () => {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      contextIsolation: false,
+      contextIsolation: false, //? Check if there is a safer solution
     },
   });
 

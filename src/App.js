@@ -1,5 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
+import PageFooter from "./components/PageFooter";
+import PageHeader from "./components/PageHeader";
 
 // bind electron main.js and react App.js for ICP using "remote"
 //! these code blocks are for the older version of Electron
@@ -13,9 +15,10 @@ const { BrowserWindow, dialog, Menu } = remote;
 
 const { shell } = window.require("electron");
 
-function App() {
+const App = () => {
   return (
     <div className="App">
+      <PageHeader />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -75,8 +78,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <PageFooter />
     </div>
   );
-}
+};
 
 export default App;

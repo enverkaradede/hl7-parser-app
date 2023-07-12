@@ -32,12 +32,13 @@ const TextInput = ({
           id={inputName || "defaultInput"}
           onChange={handleTextChange}
           className="text-input"
-          style={{
-            margin: "3em",
-            height: "200px",
-            resize: "none",
-            marginTop: "5em",
-          }}
+          style={
+            { ...{ height: "200px", resize: "none" }, ...style } || {
+              height: "200px",
+              resize: "none",
+              marginTop: "5em",
+            }
+          }
         />
       )}
     </>

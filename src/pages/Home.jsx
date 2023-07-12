@@ -1,11 +1,11 @@
-import "./style/App.css";
-import PageFooter from "./components/PageFooter";
-import PageHeader from "./components/PageHeader";
-import TextInput from "./components/TextInput";
+import React from "react";
+import PageFooter from "../components/layouts/PageFooter";
+import PageHeader from "../components/layouts/PageHeader";
+import TextInput from "../components/ui/TextInput";
 
-const App = () => {
+const Home = () => {
   return (
-    <div className="App">
+    <>
       <PageHeader />
       <TextInput
         inputRow="5"
@@ -19,8 +19,8 @@ const App = () => {
         }}
       />
       <PageFooter style={{ marginTop: "auto" }} />
-    </div>
+    </>
   );
 };
 
-export default App;
+export default Home;

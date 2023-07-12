@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/TextInput.css";
+import "../../style/ui/TextInput.css";
 
 const TextInput = ({
   inputRow = "1",

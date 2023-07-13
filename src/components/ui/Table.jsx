@@ -1,10 +1,14 @@
 import React from "react";
-// import Button from "./Button";
+import Button from "./Button";
+import { exportToExcel } from "../../utils/pure/exportToExcel";
+// import { useSelector } from "react-redux";
 
 const Table = ({ data }) => {
+  //   const tableData = useSelector((state) => state.excelExporter);
+  //   console.log(tableData);
   return (
     <>
-      <table style={{ display: "flex", alignSelf: "center" }}>
+      <table id="parsed" style={{ display: "flex", alignSelf: "center" }}>
         <tbody style={data.length === 0 ? {} : { border: "1px solid black" }}>
           {data.map((row, rowIndex) =>
             row.map((cell, cellIndex) => {
@@ -22,7 +26,11 @@ const Table = ({ data }) => {
           )}
         </tbody>
       </table>
-      {/* <Button text="Export to Excel" onClick={() => exportToExcel(tableData)} /> */}
+      {/* <Button
+        text="Export to Excel"
+        // onClick={() => exportToExcel(tableData.message)}
+        onClick={() => exportToExcel(data)}
+      /> */}
     </>
   );
 };

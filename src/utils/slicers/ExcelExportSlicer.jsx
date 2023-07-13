@@ -9,7 +9,7 @@ const excelExporterSlice = createSlice({
   initialState,
   reducers: {
     setTableData: (state, action) => {
-      state.tableData = action.payload;
+      state.message = action.payload;
     },
   },
 });

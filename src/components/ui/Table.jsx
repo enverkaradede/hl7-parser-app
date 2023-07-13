@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "./Button";
+// import Button from "./Button";
 
 const Table = ({ data }) => {
   return (
     <>
       <table style={{ display: "flex", alignSelf: "center" }}>
-        <tbody style={{ border: "1px solid black" }}>
+        <tbody style={data.length === 0 ? {} : { border: "1px solid black" }}>
           {data.map((row, rowIndex) =>
             row.map((cell, cellIndex) => {
               if (cell === "" || cell === row[0]) return null;

@@ -32,12 +32,15 @@ const Home = () => {
         text="Open in Separate Window"
         style={{ alignSelf: "center" }}
         onClick={() => {
-          openUrlPopup(
-            renderToString(<Table data={splitMessageArr} />).replace(
-              "#",
-              "&num;"
-            )
-          );
+          console.log(splitMessageArr);
+          splitMessageArr.length === 0
+            ? alert("Nothing to show. Please enter a valid HL7 message first.")
+            : openUrlPopup(
+                renderToString(<Table data={splitMessageArr} />).replace(
+                  "#",
+                  "&num;"
+                )
+              );
         }}
       />
       <PageFooter style={{ marginTop: "auto" }} />

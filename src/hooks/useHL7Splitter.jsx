@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 const useHL7Splitter = () => {
   const hl7 = useSelector((state) => state.hl7);
-  console.log(hl7);
   let messageType = "";
 
   if (hl7 === {}) messageType = "";

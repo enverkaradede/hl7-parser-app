@@ -17,9 +17,7 @@ const openUrlPopup = (content) => {
     height: 600,
     show: false,
   });
-  console.log(`----------------------------
-  data:text/html;charset=utf-8,<body>${content}</body>
-  -------------------------------`);
+
   content.includes("http")
     ? win.loadURL(content)
     : win.loadURL(`data:text/html;charset=utf-8,<body>${content}</body>`);

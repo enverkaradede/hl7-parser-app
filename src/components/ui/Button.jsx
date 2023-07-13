@@ -1,5 +1,5 @@
-import "../style/App.css";
-import "../style/Button.css";
+import "../../style/App.css";
+import "../../style/ui/Button.css";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -19,6 +19,7 @@ const Button = ({
   borderThickness,
   cursor,
   onClick,
+  style,
 }) => {
   const buttonStyle = {
     textAlign: textAlign,
@@ -38,7 +39,7 @@ const Button = ({
     <div
       id={id}
       className="noselect button-17"
-      style={buttonStyle}
+      style={{ ...buttonStyle, ...style } || buttonStyle}
       onClick={onClick}
     >
       {text}

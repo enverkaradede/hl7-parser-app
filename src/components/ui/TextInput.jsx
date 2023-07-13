@@ -1,16 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import "../../style/ui/TextInput.css";
+import { getHl7Text } from "../../utils/slicers/Hl7MessageSlicer";
 
-const TextInput = ({
-  inputRow = "1",
-  inputColumn,
-  inputName,
-  textValue,
-  setTextValue,
-  style,
-}) => {
-  const handleTextChange = (e) => {
-    setTextValue(e.target.value);
+const TextInput = ({ inputRow = "1", inputColumn, inputName, style }) => {
+  const dispatch = useDispatch();
+
+  const textHandler = (e) => {
+    dispatch(getHl7Text(e.target.value));
   };
 
   return (
@@ -20,7 +17,7 @@ const TextInput = ({
           type="text"
           name={inputName || "defaultInput"}
           id={inputName || "defaultInput"}
-          onChange={handleTextChange}
+          onChange={textHandler}
           className="text-input"
           style={style || {}}
         />
@@ -30,7 +27,7 @@ const TextInput = ({
           cols={inputColumn || "20"}
           name={inputName || "defaultInput"}
           id={inputName || "defaultInput"}
-          onChange={handleTextChange}
+          onChange={textHandler}
           className="text-input"
           style={
             { ...{ height: "200px", resize: "none" }, ...style } || {

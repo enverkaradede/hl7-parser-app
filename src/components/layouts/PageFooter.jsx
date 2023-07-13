@@ -1,6 +1,6 @@
 import React from "react";
 import "../../style/layouts/PageFooter.css";
-import { openPopup } from "../../utils/electron/windowHelper";
+import { openUrlPopup } from "../../utils/electron/windowHelper";
 
 const PageFooter = () => {
   return (
@@ -8,7 +8,7 @@ const PageFooter = () => {
       {"Developed by "}
       <span
         onClick={() =>
-          openPopup("https://github.com/enverkaradede/hl7-parser-app")
+          openUrlPopup("https://github.com/enverkaradede/hl7-parser-app")
         }
         style={{ color: "#5590bc", textDecoration: "none", cursor: "pointer" }}
       >

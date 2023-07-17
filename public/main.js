@@ -1,6 +1,7 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 
 const remoteMain = require("@electron/remote/main");
+const { excelExport } = require("../src/utils/electron/excelExporter");
 remoteMain.initialize();
 
 const createWindow = () => {
@@ -49,6 +50,10 @@ app.whenReady().then(() => {
   // exception for Mac OS allows re-opening an application window
   //   if the application would not closed by CMD + Q
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
+});
+
+ipcMain.on("get-table-data", (event, arg) => {
+  event.reply("send-file-name", excelExport(arg));
 });
 
 // exception for Mac OS allows the application to run in background

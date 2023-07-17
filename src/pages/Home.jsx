@@ -7,10 +7,15 @@ import { useHL7Splitter } from "../hooks/useHL7Splitter";
 import Table from "../components/ui/Table";
 import { openUrlPopup } from "../utils/electron/windowHelper";
 import { useTableData } from "../hooks/useTableDataHtml";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const hl7Message = useSelector((state) => state.hl7.message);
+  const hl7MessageType = useSelector((state) => state.hl7.messageType);
   const { splitMessageArr } = useHL7Splitter();
-  const { tableDataHtml } = useTableData(<Table data={splitMessageArr} />);
+  const { tableDataHtml } = useTableData(
+    <Table messageType={hl7MessageType} data={splitMessageArr} />
+  );
 
   return (
     <>
@@ -29,15 +34,18 @@ const Home = () => {
           lineHeight: "1.3rem",
         }}
       />
-      <Table data={splitMessageArr} />
+      <Table messageType={hl7MessageType} data={splitMessageArr} />
       <Button
         text="Open in Separate Window"
         style={{ alignSelf: "center" }}
         onClick={() => {
-          console.log(tableDataHtml);
           splitMessageArr.length === 0
             ? alert("Nothing to show. Please enter a valid HL7 message first.")
-            : openUrlPopup(tableDataHtml);
+            : openUrlPopup({
+                message: hl7Message,
+                messageType: hl7MessageType,
+                content: tableDataHtml,
+              });
         }}
       />
       <PageFooter style={{ marginTop: "auto" }} />

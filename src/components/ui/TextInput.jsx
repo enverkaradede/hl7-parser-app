@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import "../../style/ui/TextInput.css";
-import { getHl7Text } from "../../utils/slicers/Hl7MessageSlicer";
+import { getHl7Text } from "../../utils/store/slicers/Hl7MessageSlicer";
 
 const TextInput = ({ inputRow = "1", inputColumn, inputName, style }) => {
   const dispatch = useDispatch();

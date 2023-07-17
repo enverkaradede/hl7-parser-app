@@ -1,11 +1,18 @@
 import React from "react";
 import Button from "./Button";
-import { exportToExcel } from "../../utils/pure/exportToExcel";
-// import { useSelector } from "react-redux";
+const remote = window.require("@electron/remote");
+const { dialog } = remote;
+const { ipcRenderer } = window.require("electron");
 
-const Table = ({ data }) => {
-  //   const tableData = useSelector((state) => state.excelExporter);
-  //   console.log(tableData);
+const Table = ({ messageType, data }) => {
+  const sendTableData = ({ filePath, tableData }) => {
+    ipcRenderer.send("get-table-data", { filePath, messageType, tableData });
+  };
+
+  ipcRenderer.on("send-file-name", (event, arg) => {
+    console.log(arg);
+  });
+
   return (
     <>
       <table id="parsed" style={{ display: "flex", alignSelf: "center" }}>
@@ -26,11 +33,31 @@ const Table = ({ data }) => {
           )}
         </tbody>
       </table>
-      {/* <Button
+      <Button
         text="Export to Excel"
-        // onClick={() => exportToExcel(tableData.message)}
-        onClick={() => exportToExcel(data)}
-      /> */}
+        onClick={() =>
+          dialog
+            .showSaveDialog({
+              title: "Save Mapped Table",
+              filters: [
+                {
+                  name: "Excel",
+                  extensions: ["xlsx"],
+                },
+              ],
+            })
+            .then((file) => {
+              if (file.filePath !== "") {
+                console.log("burda", file);
+                sendTableData({
+                  filePath: file.filePath.toString(),
+                  messageType,
+                  tableData: data,
+                });
+              }
+            })
+        }
+      />
     </>
   );
 };

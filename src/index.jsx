@@ -1,20 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import hl7Reducer from "./utils/slicers/Hl7MessageSlicer";
-import excelExporterReducer from "./utils/slicers/ExcelExportSlicer";
+import store from "./utils/store/rootStore";
 
-const store = configureStore({
-  reducer: {
-    hl7: hl7Reducer,
-    excelExporter: excelExporterReducer,
-  },
-});
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>

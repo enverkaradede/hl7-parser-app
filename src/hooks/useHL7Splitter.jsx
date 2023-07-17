@@ -1,8 +1,7 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { segmentSplitter } from "../utils/pure/segmentSplitter";
 import { fieldSplitter } from "../utils/pure/fieldSplitter";
-import { setMessageType } from "../utils/slicers/Hl7MessageSlicer";
-import { useDispatch } from "react-redux";
+import { setMessageType } from "../utils/store/slicers/Hl7MessageSlicer";
 
 const useHL7Splitter = () => {
   const hl7 = useSelector((state) => state.hl7);

@@ -1,10 +1,11 @@
 import React from "react";
+import { openUrlPopup } from "../../utils/electron/windowHelper";
 import Button from "./Button";
 const remote = window.require("@electron/remote");
 const { dialog } = remote;
 const { ipcRenderer } = window.require("electron");
 
-const Table = ({ messageType, data }) => {
+const Table = ({ messageType, message, data, content }) => {
   const sendTableData = ({ filePath, tableData }) => {
     ipcRenderer.send("get-table-data", { filePath, messageType, tableData });
   };
@@ -33,31 +34,71 @@ const Table = ({ messageType, data }) => {
           )}
         </tbody>
       </table>
-      <Button
-        text="Export to Excel"
-        onClick={() =>
-          dialog
-            .showSaveDialog({
-              title: "Save Mapped Table",
-              filters: [
-                {
-                  name: "Excel",
-                  extensions: ["xlsx"],
-                },
-              ],
-            })
-            .then((file) => {
-              if (file.filePath !== "") {
-                console.log("burda", file);
-                sendTableData({
-                  filePath: file.filePath.toString(),
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignContent: "center",
+          alignItems: "center",
+          alignSelf: "center",
+        }}
+      >
+        <Button
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "center",
+          }}
+          text="Export to Excel"
+          onClick={() =>
+            dialog
+              .showSaveDialog({
+                title: "Save Mapped Table",
+                filters: [
+                  {
+                    name: "Excel",
+                    extensions: ["xlsx"],
+                  },
+                ],
+              })
+              .then((file) => {
+                if (file.filePath !== "") {
+                  console.log("burda", file);
+                  sendTableData({
+                    filePath: file.filePath.toString(),
+                    messageType,
+                    tableData: data,
+                  });
+                }
+              })
+          }
+        />
+        <Button
+          text="Open in Separate Window"
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "center",
+          }}
+          onClick={() => {
+            data.length === 0
+              ? alert(
+                  "Nothing to show. Please enter a valid HL7 message first."
+                )
+              : openUrlPopup({
+                  message,
                   messageType,
-                  tableData: data,
+                  content,
                 });
-              }
-            })
-        }
-      />
+          }}
+        />
+      </div>
     </>
   );
 };

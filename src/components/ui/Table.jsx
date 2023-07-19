@@ -10,9 +10,9 @@ const Table = ({ messageType, message, data, content }) => {
     ipcRenderer.send("get-table-data", { filePath, messageType, tableData });
   };
 
-  ipcRenderer.on("send-file-name", (event, arg) => {
-    console.log(arg);
-  });
+  // ipcRenderer.on("send-file-name", (event, arg) => {
+  //   console.log(arg);
+  // });
 
   return (
     <>
@@ -43,6 +43,8 @@ const Table = ({ messageType, message, data, content }) => {
           alignSelf: "center",
         }}
       >
+        {/* //* Buttons are not working in child window.  */}
+        {/* //TODO: Figure out how to trigger React functions in Electron's child window} */}
         <Button
           style={{
             display: "flex",

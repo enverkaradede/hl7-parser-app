@@ -9,7 +9,7 @@ const hl7MessageSlice = createSlice({
   name: "hl7",
   initialState,
   reducers: {
-    getHl7Text: (state, action) => {
+    setHl7Text: (state, action) => {
       state.message = action.payload;
     },
     setMessageType: (state, action) => {
@@ -18,5 +18,5 @@ const hl7MessageSlice = createSlice({
   },
 });
 
-export const { getHl7Text, setMessageType } = hl7MessageSlice.actions;
+export const { setHl7Text, setMessageType } = hl7MessageSlice.actions;
 export default hl7MessageSlice.reducer;

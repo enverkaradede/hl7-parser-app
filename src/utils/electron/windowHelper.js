@@ -21,8 +21,6 @@ const openUrlPopup = ({ message = "", messageType, content }) => {
     show: false,
   });
 
-  console.log(message, content);
-
   content.includes("http")
     ? win.loadURL(content)
     : win.loadURL(

@@ -1,8 +1,6 @@
 const e4n = require("excel4node");
 
-const excelExport = ({ filePath, messageType, tableData }) => {
-  console.log(filePath);
-  console.log(tableData);
+const excelExport = ({ filePath, messageType, tableData, headerData }) => {
   let rowNum = 1;
   let colNum = 1;
 
@@ -58,7 +56,7 @@ const excelExport = ({ filePath, messageType, tableData }) => {
 
   const tableHeaderStyle = workbook.createStyle({
     font: {
-      color: "#000000",
+      color: "#FFFFFF",
       size: 12,
       bold: true,
     },
@@ -71,20 +69,22 @@ const excelExport = ({ filePath, messageType, tableData }) => {
 
   const worksheet = workbook.addWorksheet("Test");
   rowNum = 12;
-  colNum = 9;
+  colNum = 1;
 
-  worksheet
-    .cell(rowNum, colNum, rowNum, colNum + 6, true)
-    .string("HL7 Message Mapping")
-    .style(tableHeaderStyle);
+  headerData.map((header) => {
+    worksheet.cell(rowNum, colNum++).string(header).style(tableHeaderStyle);
+  });
 
   tableData.map((segment) => {
     segment.map((field) => {
       if (field == "" || field == segment[0]) return null;
-      worksheet
-        .cell(++rowNum, colNum, rowNum, colNum + 6, true)
-        .string(field)
-        .style(generalCellStyle);
+      rowNum++;
+      colNum = 1;
+      worksheet.cell(rowNum, colNum++).string(field[0]).style(generalCellStyle);
+      worksheet.cell(rowNum, colNum++).string(field[2]).style(generalCellStyle);
+      worksheet.cell(rowNum, colNum++).string(field[1]).style(generalCellStyle);
+      worksheet.cell(rowNum, colNum++).string(field[3]).style(generalCellStyle);
+      worksheet.cell(rowNum, colNum++).string(field[4]).style(generalCellStyle);
     });
   });
 

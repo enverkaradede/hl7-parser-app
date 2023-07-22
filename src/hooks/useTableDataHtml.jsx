@@ -5,12 +5,6 @@ import { renderToString } from "react-dom/server";
 
 const useTableData = (tableComponent) => {
   const tableDataHtml = renderToString(tableComponent).replace("#", "&num;");
-  //   console.log(tableDataHtml);
-  //   const dispatch = useDispatch();
-
-  //   dispatch(setTableData(tableDataHtml));
-  //   const tableData = useSelector((state) => state.excelExporter);
-  //   console.log(tableData);
   return { tableDataHtml };
 };
 

@@ -10,9 +10,20 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const hl7Message = useSelector((state) => state.hl7.message);
   const hl7MessageType = useSelector((state) => state.hl7.messageType);
-  const { splitMessageArr } = useHL7Splitter();
+  const headerArr = [
+    "Segment",
+    "Segment Definition",
+    "Sample Data",
+    "Optionality",
+    "Repeatability",
+  ];
+  const { detailedFieldArr } = useHL7Splitter();
   const { tableDataHtml } = useTableData(
-    <Table messageType={hl7MessageType} data={splitMessageArr} />
+    <Table
+      messageType={hl7MessageType}
+      data={detailedFieldArr}
+      headerArr={headerArr}
+    />
   );
 
   return (
@@ -38,7 +49,8 @@ const Home = () => {
         <>
           <Table
             messageType={hl7MessageType}
-            data={splitMessageArr}
+            headerArr={headerArr}
+            data={detailedFieldArr}
             content={tableDataHtml}
             message={hl7Message}
           />

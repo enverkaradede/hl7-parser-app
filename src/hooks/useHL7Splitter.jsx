@@ -29,13 +29,16 @@ const useHL7Splitter = () => {
   const detailedFieldArr = splitMessageArr.map((segment, segmentIndex) => {
     const segmentName = segment[0];
 
+    let fieldName = "";
+
     return segment.map((field, fieldIndex) => {
       if (field === "" || fieldIndex === 0) return;
       const fieldIndicator = `${segmentName}.${fieldIndex}`;
-
-      const fieldName = Object.values(
-        fieldInfoArr[segmentName][fieldIndicator]
-      );
+      if (!(segmentName in fieldInfoArr)) {
+        fieldName = ["Unknown Field Name", "?", "?"];
+      } else {
+        fieldName = Object.values(fieldInfoArr[segmentName][fieldIndicator]);
+      }
       return (field = [fieldIndicator, field, ...fieldName]);
     });
   });

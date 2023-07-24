@@ -67,7 +67,7 @@ const excelExport = ({ filePath, messageType, tableData, headerData }) => {
     },
   });
 
-  const worksheet = workbook.addWorksheet("Test");
+  const worksheet = workbook.addWorksheet(messageType);
   rowNum = 12;
   colNum = 1;
 
